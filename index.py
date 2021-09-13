@@ -29,11 +29,10 @@ app.layout = dbc.Container(
                                 )
                             ],
                             id = 'tabs',
-                            value = 'eda'
+                            value = 'home'
                         ),
                         html.Div(id = 'content')
                     ],
-                    width=6
                 )
             ]
         )

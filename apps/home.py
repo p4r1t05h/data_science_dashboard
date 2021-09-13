@@ -4,6 +4,7 @@ import dash_bootstrap_components as dbc
 
 home_body = dbc.Container(
     [
+        html.Br(),
         dbc.Row(
             [
                 dbc.Col(
