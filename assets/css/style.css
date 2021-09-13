@@ -1,0 +1,20 @@
+.side_panel {
+    top: 20px;
+    left: 10px;
+    height: 650px;
+    width: 18rem;
+    padding: 1rem;
+    border-radius: 15px;
+    background-color: #f8f9fa;
+}
+
+.upload_btn {
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    border-width: 1px;
+    border-style: dashed;
+    border-radius: 5px;
+    text-align: center;
+    margin: 10px
+},
