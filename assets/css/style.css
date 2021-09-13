@@ -5,7 +5,7 @@
     width: 18rem;
     padding: 1rem;
     border-radius: 15px;
-    background-color: #f8f9fa;
+    background-color: #F3F1F5;
 }
 
 .upload_btn {
@@ -15,5 +15,33 @@
     border-width: 1px;
     border-style: dashed;
     border-radius: 5px;
-    text-align: center
+    text-align: center;
+    background-color: #C9CCD5
 }
+
+.custom-tabs {
+    background-color: #EFEFEF;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 14px;
+    height: fit-content;
+    cursor: pointer;
+  }
+  
+  #home_tab.custom-tab, #eda_tab.custom-tab, #model_tab.custom-tab {
+    background-color: #EFEFEF;
+    letter-spacing: 1px;
+    color: inherit;
+    border: 0;
+    border-bottom: #EFEFEF solid 4px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 18px;
+  }
+  
+  #home_tab.custom-tab--selected, #eda_tab.custom-tab--selected, #model_tab.custom-tab--selected {
+    border-bottom: #A45D5D solid 4px !important;
+  }

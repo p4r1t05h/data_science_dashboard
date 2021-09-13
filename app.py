@@ -21,6 +21,7 @@ server = app.server
 
 app.layout = dbc.Container(
     [
+        dcc.Store('uploaded_data'),
         dbc.Row(
             [
                 dbc.Col(
@@ -28,20 +29,30 @@ app.layout = dbc.Container(
                         dcc.Tabs(
                             [
                                 dcc.Tab(
+                                    id = 'home_tab',
                                     label='Home',
                                     value='home',
+                                    className="custom-tab",
+                                    selected_className="custom-tab--selected",
                                 ),
                                 dcc.Tab(
+                                    id = 'eda_tab',
                                     label='Exploratory Analysis',
                                     value='eda',
+                                    className="custom-tab",
+                                    selected_className="custom-tab--selected",
                                 ),
                                 dcc.Tab(
+                                    id = 'model_tab',
                                     label='Building Models',
                                     value='model',
+                                    className="custom-tab",
+                                    selected_className="custom-tab--selected",
                                 )
                             ],
                             id = 'tabs',
-                            value = 'home'
+                            value = 'home',
+                            className='custom-tabs'
                         ),
                         html.Div(id = 'content')
                     ],
@@ -71,7 +82,7 @@ def switch_tab(at):
         else:
             return errorPage.error_page_body
     except Exception as e:
-        errorLogger.insert_error('index', 'switch_tab', str(e), traceback.format_exc())
+        errorLogger.insert_error('app', 'switch_tab', str(e), traceback.format_exc())
 
 
 if __name__ == '__main__':
