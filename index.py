@@ -3,7 +3,7 @@ from dash import dcc
 from dash import html
 from dash.dependencies import Input, Output
 import dash_bootstrap_components as dbc
-from app import app
+from app import app, server
 import traceback
 from apps import home, eda, model, errorPage, errorLogger
 
