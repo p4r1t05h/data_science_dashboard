@@ -13,11 +13,45 @@ import dash_bootstrap_components as dbc
 import traceback
 from apps import home, eda, model, errorPage, errorLogger
 
-# external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(__name__)
+app = dash.Dash(__name__, external_stylesheets = external_stylesheets)
 
 server = app.server
+
+# navbar = dbc.Navbar(
+#     dbc.Container(
+#         [
+#             dbc.Row(
+#                 [
+#                     dbc.Col(
+#                         dbc.Collapse(
+#                             dbc.Nav(
+#                                 [
+#                                     dbc.NavItem(dbc.NavLink("Home", href="/home")),
+#                                     dbc.NavItem(dbc.NavLink("Exploratory Analysis", href="/eda")),
+#                                     dbc.NavItem(dbc.NavLink("Model Building", href="/model")),
+#                                 ],
+#                             ),
+#                             navbar = True
+#                         ),
+#                         width = 10
+#                     ),
+                    
+#                 ]
+#             )            
+#         ]
+#     ),
+#     color="primary",
+#     dark=True,
+# )
+
+# app.layout = dbc.Container(
+#     [
+#         navbar,
+#         html.Div(id = 'page_content')
+#     ]
+# )
 
 app.layout = dbc.Container(
     [
@@ -63,9 +97,9 @@ app.layout = dbc.Container(
     fluid=True
 )
 
-####################################################################################
-## Switiching between tabs
-####################################################################################
+###################################################################################
+# Switiching between tabs
+###################################################################################
 
 @app.callback(
     Output('content', 'children'),
