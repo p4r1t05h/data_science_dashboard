@@ -81,10 +81,3 @@ def display_page(pathname):
             return home.home_body
     except Exception as e:
         print(traceback.format_exc())
-
-##################################################################################
-# Calling app
-##################################################################################
-
-if __name__ == '__main__':
-    app.run_server(debug=True)
