@@ -21,6 +21,78 @@ df = pd.read_csv('./data/Life Expectancy Data.csv')
 ## Home Layout
 ####################################################################################
 
+# home_body = html.Div(
+#     [
+#         html.Br(),
+#         html.Div(
+#             [
+#                 dbc.Card(
+#                     [
+#                         # html.Br(),
+#                         # dcc.Upload(
+#                         #     id='home_upload',
+#                         #     children=html.Div([
+#                         #         'Drag and Drop or ',
+#                         #         html.A('Select Files')
+#                         #     ]),
+#                         #     className = 'upload_btn',
+#                         # ),
+#                         # html.Br(),
+#                         # html.Div(id='uploaded_filename'),
+#                         # html.Br(),
+#                         dbc.Label(html.B('Select Target Variable')),
+#                         dcc.Dropdown(
+#                             id='home_dropdown',
+#                             className='dropdowns'
+#                         )
+#                     ],
+#                     className = 'side_panel'
+#                 )
+#             ],
+#             # width = {"size": 3, "order": 1}
+#             # width=3
+#         ),
+#         html.Br(),
+#         html.Div(
+#             [
+#                 dash_table.DataTable(
+#                     id='home_table',
+#                     data = df.to_dict('records'),
+#                     columns = [{"name": i, "id": i} for i in df.columns],
+#                     style_data = {
+#                         'whiteSpace': 'normal',
+#                         'height': 'auto',
+#                         'minWidth': '190px',
+#                         'width': '190px',
+#                         'maxWidth': '190px'
+#                     },
+#                     fixed_rows={
+#                         'headers': True
+#                     },
+#                     style_table={
+#                         'height': '400px',
+#                         'overflowY':'auto',
+#                         'overflowX': 'auto'
+#                     },
+#                     style_header={
+#                         'fontWeight': 'bold',
+#                         'textAlign':'center',
+#                         'border': '1px solid black',
+#                         'backgroundColor': 'rgb(239, 239, 239)',
+#                         'color': 'black',
+#                         'font-size': '16px'
+#                     },
+#                     style_cell={
+#                         'border': '1px solid grey',
+#                         'textAlign': 'center',
+#                     }
+#                 )
+#             ],
+#             style = {'width': '1250px'}
+#             # width= 6
+#         )
+#     ]
+# )
 
 home_body = dbc.Container(
     [
@@ -31,24 +103,28 @@ home_body = dbc.Container(
                     [
                         dbc.Card(
                             [
-                                # dcc.Upload(
-                                #     id='home_upload',
-                                #     children=html.Div([
-                                #         'Drag and Drop or ',
-                                #         html.A('Select Files')
-                                #     ]),
-                                #     className = 'upload_btn',
-                                # ),
-                                # html.Br(),
-                                # html.Div(id='uploaded_filename'),
+                                dcc.Upload(
+                                    id='home_upload',
+                                    children=html.Div([
+                                        'Drag and Drop or ',
+                                        html.A('Select Files')
+                                    ]),
+                                    className = 'upload_btn',
+                                ),
                                 html.Br(),
-                                dcc.Dropdown(id='home_dropdown'),
+                                # html.Div(id='uploaded_filename'),
+                                # html.Br(),
+                                dbc.Label(html.B('Select Target Variable')),
+                                dcc.Dropdown(
+                                    id='home_dropdown',
+                                    className='dropdowns'
+                                ),
                             ],
                             className = 'side_panel'
                         )
                     ],
                     # width = {"size": 3, "order": 1}
-                    width=2
+                    width=3
                 ),
                 html.Br(),
                 # dbc.Col(width = 1),
@@ -88,13 +164,12 @@ home_body = dbc.Container(
                         )
                     ],
                     # width = {"size": 5, "order": 2}
-                    width= 5
+                    width= 8
                 )
             ]
         )
     ],
-    fluid= True,
-    
+    fluid= True    
 )
 
 # ####################################################################################
