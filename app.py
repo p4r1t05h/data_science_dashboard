@@ -19,104 +19,130 @@ app = dash.Dash(__name__, external_stylesheets = external_stylesheets)
 
 server = app.server
 
-# navbar = dbc.Navbar(
-#     dbc.Container(
-#         [
-#             dbc.Row(
-#                 [
-#                     dbc.Col(
-#                         dbc.Collapse(
-#                             dbc.Nav(
-#                                 [
-#                                     dbc.NavItem(dbc.NavLink("Home", href="/home")),
-#                                     dbc.NavItem(dbc.NavLink("Exploratory Analysis", href="/eda")),
-#                                     dbc.NavItem(dbc.NavLink("Model Building", href="/model")),
-#                                 ],
-#                             ),
-#                             navbar = True
-#                         ),
-#                         width = 10
-#                     ),
-                    
-#                 ]
-#             )            
-#         ]
-#     ),
-#     color="primary",
-#     dark=True,
-# )
-
-# app.layout = dbc.Container(
-#     [
-#         navbar,
-#         html.Div(id = 'page_content')
-#     ]
-# )
+navbar = html.Div(
+    id="banner",
+    className="banner",
+    children=[
+        html.Div(
+            id="banner_text",
+            children=[
+                html.H5("Data Science Dashboard"),
+            ],
+        ),
+        html.Div(
+            id="banner_nav",
+            children=[
+                html.A(
+                    html.Button(children="Home"),
+                    href="/home",
+                ),
+                html.A(
+                    html.Button(children="Exploratory Analysis"),
+                    href="/eda",
+                ),
+                html.A(
+                    html.Button(children="Model Building"),
+                    href="/model",
+                ),
+                # html.Button(
+                #     id="learn-more-button", children="LEARN MORE", n_clicks=0
+                # ),
+            ],
+        ),
+    ],
+)
 
 app.layout = dbc.Container(
     [
-        dcc.Store('uploaded_data'),
-        dbc.Row(
-            [
-                dbc.Col(
-                    [
-                        dcc.Tabs(
-                            [
-                                dcc.Tab(
-                                    id = 'home_tab',
-                                    label='Home',
-                                    value='home',
-                                    className="custom-tab",
-                                    selected_className="custom-tab--selected",
-                                ),
-                                dcc.Tab(
-                                    id = 'eda_tab',
-                                    label='Exploratory Analysis',
-                                    value='eda',
-                                    className="custom-tab",
-                                    selected_className="custom-tab--selected",
-                                ),
-                                dcc.Tab(
-                                    id = 'model_tab',
-                                    label='Building Models',
-                                    value='model',
-                                    className="custom-tab",
-                                    selected_className="custom-tab--selected",
-                                )
-                            ],
-                            id = 'tabs',
-                            value = 'home',
-                            className='custom-tabs'
-                        ),
-                        html.Div(id = 'content')
-                    ],
-                )
-            ]
-        )
+        dcc.Location(id = 'url', refresh = False),
+        navbar,
+        html.Div(id = 'page_content')
     ],
     fluid=True
 )
 
-###################################################################################
-# Switiching between tabs
-###################################################################################
 
 @app.callback(
-    Output('content', 'children'),
-    Input('tabs', 'value')
+    Output('page_content', 'children'),
+    Input('url', 'pathname')
 )
-def switch_tab(at):
+def display_page(pathname):
     try:
-        if at == 'home':
+        if pathname == '/home':
             return home.home_body
-        elif at == 'eda':
+        elif pathname == '/eda':
             return eda.eda_body
-        elif at=='model':
+        elif pathname == '/model':
             return model.model_body
         else:
-            return errorPage.error_page_body
+            return home.home_body
     except Exception as e:
-        errorLogger.insert_error('app', 'switch_tab', str(e), traceback.format_exc())
+        print(traceback.format_exc())
+
+# app.layout = dbc.Container(
+#     [
+#         dcc.Store('uploaded_data'),
+#         dbc.Row(
+#             [
+#                 dbc.Col(
+#                     [
+#                         dcc.Tabs(
+#                             [
+#                                 dcc.Tab(
+#                                     id = 'home_tab',
+#                                     label='Home',
+#                                     value='home',
+#                                     className="custom-tab",
+#                                     selected_className="custom-tab--selected",
+#                                 ),
+#                                 dcc.Tab(
+#                                     id = 'eda_tab',
+#                                     label='Exploratory Analysis',
+#                                     value='eda',
+#                                     className="custom-tab",
+#                                     selected_className="custom-tab--selected",
+#                                 ),
+#                                 dcc.Tab(
+#                                     id = 'model_tab',
+#                                     label='Building Models',
+#                                     value='model',
+#                                     className="custom-tab",
+#                                     selected_className="custom-tab--selected",
+#                                 )
+#                             ],
+#                             id = 'tabs',
+#                             value = 'home',
+#                             className='custom-tabs'
+#                         ),
+#                         html.Div(id = 'content')
+#                     ],
+#                 )
+#             ]
+#         )
+#     ],
+#     fluid=True
+# )
+
+# ##################################################################################
+# Switiching between tabs
+# ##################################################################################
+
+# @app.callback(
+#     Output('content', 'children'),
+#     Input('tabs', 'value')
+# )
+# def switch_tab(at):
+#     try:
+#         if at == 'home':
+#             return home.home_body
+#         elif at == 'eda':
+#             return eda.eda_body
+#         elif at=='model':
+#             return model.model_body
+#         else:
+#             return errorPage.error_page_body
+#     except Exception as e:
+#         errorLogger.insert_error('app', 'switch_tab', str(e), traceback.format_exc())
 
 
 if __name__ == '__main__':
