@@ -2,7 +2,7 @@ from dash import dcc, html
 import dash_bootstrap_components as dbc
 from dash.dependencies import Input, Output, State
 from app import app
-from apps import missingTab, outliersTab
+from apps import missingTab, outliersTab, collinearTab, bivariateTab
 import traceback
 
 
@@ -20,36 +20,29 @@ eda_body = dbc.Container(
                             [
                                 dcc.Tab(
                                     id = 'missing_tab',
-                                    label='Missing Value Treatment',
+                                    label='Missing Value Analysis',
                                     value='missing',
                                     className="custom-tab",
                                     selected_className="custom-tab--selected",
                                 ),
                                 dcc.Tab(
                                     id = 'oulier_tab',
-                                    label='Outliers Treatment',
+                                    label='Outliers Analysis',
                                     value='outlier',
                                     className="custom-tab",
                                     selected_className="custom-tab--selected",
                                 ),
                                 dcc.Tab(
-                                    id = 'scaling_tab',
-                                    label='Feature Scaling',
-                                    value='scaling',
+                                    id = 'collinear_tab',
+                                    label='Collinearity Analysis',
+                                    value='collinear',
                                     className="custom-tab",
                                     selected_className="custom-tab--selected",
                                 ),
                                 dcc.Tab(
-                                    id = 'encoding_tab',
-                                    label='Feature Encoding',
-                                    value='encoding',
-                                    className="custom-tab",
-                                    selected_className="custom-tab--selected",
-                                ),
-                                dcc.Tab(
-                                    id = 'selection_tab',
-                                    label='Feature Selection',
-                                    value='selection',
+                                    id = 'bivariate_tab',
+                                    label='Bivariate Analysis',
+                                    value='bivariate',
                                     className="custom-tab",
                                     selected_className="custom-tab--selected",
                                 )
@@ -79,7 +72,11 @@ def eda_switch_tab(at):
     try:
         if at == 'missing':
             return missingTab.missingTabBody
-        if at == 'outlier':
+        elif at == 'outlier':
             return outliersTab.outliersTabBody
+        elif at == 'collinear':
+            return collinearTab.collinearTabBody
+        elif at == 'bivariate':
+            return bivariateTab.bivariateTabBody
     except Exception as e:
         print(traceback.format_exc())
