@@ -5,6 +5,7 @@ from dash.dependencies import Input, Output, State
 import traceback
 import plotly.express as px
 import pandas as pd
+from apps import generalFunctions
 
 ####################################################################################
 ## Reading Data data
@@ -14,12 +15,26 @@ df = pd.read_csv('./data/Life Expectancy Data.csv')
 df['Year'] = df['Year'].astype(str)
 msng = df.isnull().sum().reset_index().rename(columns = {'index':'ColName',0:'Value'})#.to_dict()
 
+####################################################################################
+## Generating figure
+####################################################################################
+
+fig = px.bar(msng[msng['Value']>0], x='ColName', y='Value')
+fig.update_layout(
+    generalFunctions.common_layout,
+    width = 1200,
+    height = 650
+)
+fig.update_xaxes(generalFunctions.common_Xaxes, side="top")
+fig.update_yaxes(generalFunctions.common_Yaxes)
+
 ##################################################################################
 # Tab layout for Missing Tab Treatment
 ##################################################################################
 
 missingTabBody = dbc.Container(
     [
+        html.Br(),
         dbc.Row(
             [
                 # dbc.Col(
@@ -31,7 +46,7 @@ missingTabBody = dbc.Container(
                 # ),
                 dbc.Col(
                     [
-                        dcc.Graph(figure=px.bar(msng[msng['Value']>0], x='ColName', y='Value'))
+                        dcc.Graph(figure=fig)
                     ],
                     width=8
                 )

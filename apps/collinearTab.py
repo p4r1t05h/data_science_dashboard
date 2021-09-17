@@ -5,6 +5,7 @@ from dash.dependencies import Input, Output, State
 import traceback
 import plotly.express as px
 import pandas as pd
+from apps import generalFunctions
 
 ####################################################################################
 ## Reading Data data
@@ -15,7 +16,18 @@ df['Year'] = df['Year'].astype(str)
 
 corr = df.corr()
 
+####################################################################################
+## Generating figure
+####################################################################################
+
 fig = px.imshow(corr)
+fig.update_layout(
+    generalFunctions.common_layout,
+    width = 1200,
+    height = 650
+)
+fig.update_xaxes(generalFunctions.common_Xaxes, side="top")
+fig.update_yaxes(generalFunctions.common_Yaxes)
 
 ##################################################################################
 # Tab layout for Collinear Tab Analysis
@@ -23,6 +35,7 @@ fig = px.imshow(corr)
 
 collinearTabBody = dbc.Container(
     [
+        html.Br(),
         dbc.Row(
             [
                 # dbc.Col(

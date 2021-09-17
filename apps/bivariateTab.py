@@ -6,6 +6,7 @@ from app import app
 import traceback
 import plotly.express as px
 import pandas as pd
+from apps import generalFunctions
 
 ####################################################################################
 ## Reading Data data
@@ -21,6 +22,7 @@ colNames = df[df.dtypes[(df.dtypes=="float64")|(df.dtypes=="int64")].index.value
 
 bivariateTabBody = dbc.Container(
     [
+        html.Br(),
         dbc.Row(
             [
                 dbc.Col(
@@ -66,6 +68,13 @@ def update_output(value):
     try:
         if value is not None:
             fig = fig = px.scatter(x=df['Life expectancy '], y=df[value])
+            fig.update_layout(
+                generalFunctions.common_layout,
+                width = 1000,
+                height = 650
+            )
+            fig.update_xaxes(generalFunctions.common_Xaxes)
+            fig.update_yaxes(generalFunctions.common_Yaxes)
             return fig
         else:
             return dash.no_update

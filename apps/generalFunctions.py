@@ -29,3 +29,34 @@ def parse_contents(contents, filename):
         return df
     # except Exception as e:
     #     errorLogger.insert_error('generalFunctions', 'parse_contents', str(e), traceback.format_exc())
+
+####################################################################################
+## Creating common settings for graphs
+####################################################################################
+
+common_Xaxes = dict(
+    zeroline = False,
+    showgrid = False,
+    showticklabels = True,
+    ticks = 'outside',
+    tickwidth = 3,
+    linewidth = 3
+)
+
+common_Yaxes = dict(
+    zeroline = False,
+    showgrid = False,
+    showline = True,
+    showticklabels = True,
+    ticks = 'outside',
+    tickwidth = 3,
+    linewidth = 3
+)
+
+common_layout = dict(
+    uniformtext_minsize = 8,
+    uniformtext_mode = 'hide',
+    font_family = 'time new roman',
+    font_size = 16,
+    autosize = False
+)
